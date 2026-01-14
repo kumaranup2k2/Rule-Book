@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
+
+:root {
+    --bg-dark: #0a0f1d; 
+    --glass-bg: rgba(255, 255, 255, 0.07); 
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --accent-blue: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-dark);
+    background-image: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent 40%),
+                      radial-gradient(circle at bottom left, rgba(37, 99, 235, 0.05), transparent 40%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.glass-morphism {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.4s ease;
+}
+
+@media (max-width: 768px) {
+    .glass-morphism {
+        padding: 1.25rem !important;
+    }
+}
+
+.input-field {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: white;
+    outline: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.input-field:focus {
+    border-color: var(--accent-blue);
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.input-field:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary {
+    background: var(--accent-blue);
+    color: white;
+    font-weight: 800;
+    padding: 14px 40px;
+    border-radius: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 20px -10px var(--accent-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px -10px var(--accent-glow);
+    background-color: #2563eb;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+#settingsPanel {
+    transition: transform 0.4s ease;
+    z-index: 101;
+}
+
+table thead tr {
+    border-bottom: 1px solid var(--glass-border);
+}
+
+table tbody tr {
+    transition: background 0.2s ease;
+}
+
+table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.snowflake {
+    position: absolute;
+    top: -20px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.2;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(105vh); }
+}

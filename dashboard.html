@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Rule Book</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="p-4 md:p-10 bg-[#0a0f1d] text-white"> 
+    <header class="max-w-6xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+            <h1 class="text-4xl font-black text-blue-400 tracking-tighter">RULE BOOK</h1>
+            <p class="text-gray-400">Welcome, <span id="displayUser" class="text-white font-bold">Trader</span>!</p>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="glass-morphism px-6 py-3 rounded-2xl text-center min-w-[150px]">
+                <p class="text-[10px] text-gray-500 uppercase font-black">Current Capital</p>
+                <p id="displayCapital" class="text-xl font-mono text-emerald-400 font-bold">₹0</p>
+            </div>
+            <button onclick="toggleSettings()" class="p-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-gear text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto">
+        <section class="glass-morphism p-6 rounded-3xl mb-10 border border-white/5">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div class="space-y-1">
+                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">Date</label>
+                    <input type="date" id="date" class="input-field">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">P&L</label>
+                    <input type="number" id="pl" placeholder="0.00" class="input-field">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">Brokerage</label>
+                    <input type="number" id="brokerage" placeholder="0.00" class="input-field">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">Tax</label>
+                    <input type="number" id="tax" placeholder="0.00" class="input-field">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">Notes</label>
+                    <input type="text" style="display:none;" aria-hidden="true">
+                    <input type="text" id="notes" placeholder="Strategy Notes" class="input-field" autocomplete="new-password">
+                </div>
+            </div>
+            <button onclick="saveTrade()" class="btn-primary mt-6">
+                <i class="fa-solid fa-plus mr-2"></i> SAVE ENTRY
+            </button>
+        </section>
+
+        <div class="overflow-x-auto glass-morphism rounded-3xl border border-white/5">
+            <table class="w-full text-left">
+                <thead class="bg-white/5 text-gray-400 uppercase text-[10px] tracking-widest border-b border-white/5">
+                    <tr>
+                        <th class="p-5">Date</th>
+                        <th class="p-5">Net P&L</th>
+                        <th class="p-5">Balance</th>
+                        <th class="p-5 text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="journalBody" class="text-sm">
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden justify-end z-[100]">
+        <div id="settingsPanel" class="glass-morphism h-full w-full max-w-xs p-8 flex flex-col border-l border-white/10 shadow-2xl transition-transform duration-300">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-2xl font-bold text-blue-400">Settings</h2>
+                <button onclick="toggleSettings()" class="text-gray-500 hover:text-white">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+                <button onclick="exportData()" class="input-field text-left flex justify-between items-center bg-white/5 hover:bg-white/10">
+                    <span><i class="fa-solid fa-file-export mr-2 text-blue-400"></i> Export CSV</span>
+                </button>
+                <button onclick="verifyAndAction('updateCap')" class="input-field text-left flex justify-between items-center bg-white/5 hover:bg-white/10">
+                    <span><i class="fa-solid fa-pen-to-square mr-2 text-emerald-400"></i> Update Capital</span>
+                    <i class="fa-solid fa-lock text-[10px] text-gray-600"></i>
+                </button>
+                <button onclick="verifyAndAction('reset')" class="input-field text-left text-red-400 flex justify-between items-center bg-white/5 hover:bg-red-500/10">
+                    <span><i class="fa-solid fa-rotate-left mr-2"></i> Reset Data</span>
+                    <i class="fa-solid fa-lock text-[10px] text-red-900/50"></i>
+                </button>
+            </div>
+            
+            <button onclick="logout()" class="w-full py-4 text-gray-500 hover:text-red-400 font-bold uppercase tracking-widest text-[10px] border-t border-white/5 pt-6">
+                Sign Out Account
+            </button>
+        </div>
+    </div>
+
+    <div id="pwdModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl hidden items-center justify-center z-[110] p-4">
+        <div class="glass-morphism p-8 rounded-[2.5rem] w-full max-w-sm text-center border border-white/10 shadow-2xl">
+            <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-user-shield text-3xl text-blue-500"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Security Check</h3>
+            <p id="verifyMsg" class="text-gray-500 text-xs mb-8">Verify identity to change sensitive settings.</p>
+            
+            <div id="pwdInputSection">
+                <input type="password" id="verifyPwd" class="input-field text-center mb-6" placeholder="Password">
+            </div>
+
+            <div id="googleVerifySection" class="hidden w-full">
+                <button onclick="reauthGoogle()" class="w-full bg-white text-black py-4 rounded-2xl font-bold flex items-center justify-center gap-3 mb-6 shadow-xl active:bg-gray-200">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" alt="Google"> 
+                    Verify with Google
+                </button>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closePwdModal()" class="flex-1 py-4 bg-white/5 rounded-2xl font-bold">Cancel</button>
+                <button id="confirmBtn" class="flex-1 btn-primary py-4 rounded-2xl">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
