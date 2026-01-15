@@ -3,129 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Rule Book</title>
+    <title>Rule Book - Trading Journal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init("GUlvHb09NFXc-NBDB"); 
+    })();
+    </script>
 </head>
-<body class="p-4 md:p-10 bg-[#0a0f1d] text-white"> 
-    <header class="max-w-6xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div>
-            <h1 class="text-4xl font-black text-blue-400 tracking-tighter">RULE BOOK</h1>
-            <p class="text-gray-400">Welcome, <span id="displayUser" class="text-white font-bold">Trader</span>!</p>
-        </div>
-        <div class="flex items-center gap-4">
-            <div class="glass-morphism px-6 py-3 rounded-2xl text-center min-w-[150px]">
-                <p class="text-[10px] text-gray-500 uppercase font-black">Current Capital</p>
-                <p id="displayCapital" class="text-xl font-mono text-emerald-400 font-bold">₹0</p>
-            </div>
-            <button onclick="toggleSettings()" class="p-4 text-gray-400 hover:text-white transition-colors">
-                <i class="fa-solid fa-gear text-2xl"></i>
-            </button>
-        </div>
-    </header>
+<body class="bg-[#050505] text-white p-4 md:p-10 transition-opacity duration-700" id="mainBody" style="opacity: 0;">
 
-    <main class="max-w-6xl mx-auto">
-        <section class="glass-morphism p-6 rounded-3xl mb-10 border border-white/5">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <div class="space-y-1">
-                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">Date</label>
-                    <input type="date" id="date" class="input-field">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">P&L</label>
-                    <input type="number" id="pl" placeholder="0.00" class="input-field">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">Brokerage</label>
-                    <input type="number" id="brokerage" placeholder="0.00" class="input-field">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">Tax</label>
-                    <input type="number" id="tax" placeholder="0.00" class="input-field">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] text-gray-500 uppercase font-bold ml-2">Notes</label>
-                    <input type="text" style="display:none;" aria-hidden="true">
-                    <input type="text" id="notes" placeholder="Strategy Notes" class="input-field" autocomplete="new-password">
-                </div>
-            </div>
-            <button onclick="saveTrade()" class="btn-primary mt-6">
-                <i class="fa-solid fa-plus mr-2"></i> SAVE ENTRY
-            </button>
-        </section>
-
-        <div class="overflow-x-auto glass-morphism rounded-3xl border border-white/5">
-            <table class="w-full text-left">
-                <thead class="bg-white/5 text-gray-400 uppercase text-[10px] tracking-widest border-b border-white/5">
-                    <tr>
-                        <th class="p-5">Date</th>
-                        <th class="p-5">Net P&L</th>
-                        <th class="p-5">Balance</th>
-                        <th class="p-5 text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="journalBody" class="text-sm">
-                    </tbody>
-            </table>
-        </div>
-    </main>
-
-    <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden justify-end z-[100]">
-        <div id="settingsPanel" class="glass-morphism h-full w-full max-w-xs p-8 flex flex-col border-l border-white/10 shadow-2xl transition-transform duration-300">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-2xl font-bold text-blue-400">Settings</h2>
-                <button onclick="toggleSettings()" class="text-gray-500 hover:text-white">
-                    <i class="fa-solid fa-xmark text-2xl"></i>
-                </button>
+    <div class="max-w-[1440px] mx-auto" id="dashboardContent">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6 reveal-card">
+            <div class="header-logo">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-200 to-white leading-tight py-2">
+                    RULE BOOK
+                </h1>
+                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.4em]">Welcome, <span id="displayUser" class="text-cyan-accent">Trader</span></p>
             </div>
             
-            <div class="space-y-4 flex-1">
-                <button onclick="exportData()" class="input-field text-left flex justify-between items-center bg-white/5 hover:bg-white/10">
-                    <span><i class="fa-solid fa-file-export mr-2 text-blue-400"></i> Export CSV</span>
-                </button>
-                <button onclick="verifyAndAction('updateCap')" class="input-field text-left flex justify-between items-center bg-white/5 hover:bg-white/10">
-                    <span><i class="fa-solid fa-pen-to-square mr-2 text-emerald-400"></i> Update Capital</span>
-                    <i class="fa-solid fa-lock text-[10px] text-gray-600"></i>
-                </button>
-                <button onclick="verifyAndAction('reset')" class="input-field text-left text-red-400 flex justify-between items-center bg-white/5 hover:bg-red-500/10">
-                    <span><i class="fa-solid fa-rotate-left mr-2"></i> Reset Data</span>
-                    <i class="fa-solid fa-lock text-[10px] text-red-900/50"></i>
-                </button>
+            <div class="flex items-center gap-4">
+                <div class="header-stats bento-card px-8 py-4 flex flex-col items-end min-w-[240px]">
+                    <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest mb-1">Total Balance</p>
+                    <p class="text-3xl font-bold text-cyan-accent font-mono">
+                        <span class="currency-symbol">₹</span><span id="displayCapVal" class="privacy-blur">0</span>
+                    </p>
+                    <div class="flex items-center gap-2 mt-1 mb-2">
+                        <p class="text-[8px] text-gray-600 font-black uppercase">Total Withdraw:</p>
+                        <p class="text-[10px] font-bold text-red-400 italic">₹<span id="totalWithdrawnVal">0</span></p>
+                    </div>
+                    <button onclick="openWithdrawModal()" class="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-colors border border-white/10 px-3 py-1 rounded-full hover:bg-white/5">Withdraw</button>
+                </div>
+                <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 cursor-pointer hover:border-cyan-accent/40 transition-all hover:scale-105 active:scale-95 shadow-lg" onclick="toggleSettings()">
+                    <i class="fa-solid fa-user-ninja text-gray-300 text-xl"></i>
+                </div>
             </div>
-            
-            <button onclick="logout()" class="w-full py-4 text-gray-500 hover:text-red-400 font-bold uppercase tracking-widest text-[10px] border-t border-white/5 pt-6">
-                Sign Out Account
-            </button>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-auto">
+            <div class="md:col-span-3 bento-card p-6 flex flex-col justify-between h-36 reveal-card">
+                <div class="flex justify-between items-start">
+                    <div class="w-8 h-8 rounded-lg bg-cyan-accent/10 flex items-center justify-center"><i class="fa-solid fa-bolt-lightning text-cyan-accent text-xs"></i></div>
+                    <span id="winRate" class="text-2xl font-black italic">0%</span>
+                </div>
+                <p class="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em]">Win Rate</p>
+            </div>
+            <div class="md:col-span-3 bento-card p-6 flex flex-col justify-between h-36 reveal-card">
+                <div class="flex justify-between items-start">
+                    <div class="w-8 h-8 rounded-lg bg-purple-accent/10 flex items-center justify-center"><i class="fa-solid fa-shield-heart text-purple-accent text-xs"></i></div>
+                    <span id="discScore" class="text-2xl font-black italic">0%</span>
+                </div>
+                <p class="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em]">Discipline</p>
+            </div>
+            <div class="md:col-span-3 bento-card p-6 flex flex-col justify-between h-36 reveal-card">
+                <div class="flex justify-between items-start">
+                    <div class="w-8 h-8 rounded-lg bg-green-accent/10 flex items-center justify-center"><i class="fa-solid fa-arrow-trend-up text-green-accent text-xs"></i></div>
+                    <span class="text-2xl font-black italic"><span class="currency-symbol">₹</span><span id="totalNetVal" class="privacy-blur">0</span></span>
+                </div>
+                <p class="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em]">Total Profit</p>
+            </div>
+            <div class="md:col-span-3 bento-card p-6 flex flex-col justify-between h-36 reveal-card">
+                <div class="flex justify-between items-start">
+                    <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center"><i class="fa-solid fa-layer-group text-gray-400 text-xs"></i></div>
+                    <div class="text-right leading-tight">
+                        <span id="totalTradesVal" class="text-2xl font-black italic">0</span>
+                        <p class="text-gray-600 text-[8px] font-black uppercase tracking-widest">Trades</p>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center border-t border-white/5 pt-2 mt-1">
+                    <div>
+                        <p class="text-[8px] text-gray-500 font-black uppercase">Brokrage</p>
+                        <p class="text-[12px] font-bold text-white italic">₹<span id="totalBrokVal">0</span></p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[8px] text-gray-500 font-black uppercase">taxes</p>
+                        <p class="text-[12px] font-bold text-white italic">₹<span id="totalTaxVal">0</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-8 bento-card p-8 h-[550px] flex flex-col reveal-card">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-1.5 h-4 bg-cyan-accent rounded-full shadow-[0_0_10px_#00f2ff]"></div>
+                    <h3 class="text-[10px] font-black text-gray-500 uppercase tracking-widest">Growth Graph</h3>
+                </div>
+                <div class="flex-grow"><canvas id="equityChart"></canvas></div>
+            </div>
+
+            <div class="md:col-span-4 bento-card p-8 h-[550px] flex flex-col justify-between reveal-card border-cyan-accent/10">
+                <div class="space-y-6">
+                    <h3 class="text-[10px] font-black text-cyan-accent uppercase tracking-[0.3em] mb-4">New Entry</h3>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="number" id="pl" placeholder="Profit/Loss" class="input-field">
+                            <input type="date" id="date" class="input-field text-[10px]">
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <input type="number" id="tradeQty" placeholder="Trades" class="input-field text-[11px]">
+                            <input type="number" id="brokerage" placeholder="Brok." class="input-field text-[11px]">
+                            <input type="number" id="tax" placeholder="Tax" class="input-field text-[11px]">
+                        </div>
+                        <div class="p-5 rounded-3xl bg-white/[0.02] border border-white/5 space-y-4">
+                            <p class="text-[8px] font-black text-gray-600 uppercase tracking-[0.3em]">Rules Check</p>
+                            <label class="checkbox-container"><input type="checkbox" class="rule-item" value="SL"> <span class="checkmark"></span> Stop Loss Set</label>
+                            <label class="checkbox-container"><input type="checkbox" class="rule-item" value="Strategy"> <span class="checkmark"></span> Strategy Match</label>
+                            <label class="checkbox-container"><input type="checkbox" class="rule-item" value="FOMO"> <span class="checkmark"></span> No FOMO</label>
+                        </div>
+                        <textarea id="notes" placeholder="Trade notes..." class="input-field h-24 resize-none"></textarea>
+                    </div>
+                </div>
+                <button onclick="saveTrade()" class="w-full bg-white text-black py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-[#00d1ff] transition-all mt-4">Save Trade</button>
+            </div>
+
+            <div class="md:col-span-4 bento-card p-8 flex flex-col justify-between reveal-card">
+                <div class="space-y-5">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-[10px] font-black text-purple-accent uppercase tracking-widest">Weekly Goal</h3>
+                        <button onclick="setWeeklyGoal()" class="target-gear-btn text-gray-700 hover:text-white transition-colors"><i class="fa-solid fa-gear text-xs"></i></button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-[9px] text-gray-500 uppercase font-black">Week Profit</p>
+                                <h2 id="weeklyProfitDisplay" class="text-3xl font-black text-white italic">₹0</h2>
+                            </div>
+                            <p id="targetDisplay" class="text-[10px] font-bold text-gray-500 font-mono"></p>
+                        </div>
+                        <div class="progress-container"><div id="progressBar" class="progress-fill"></div></div>
+                        <p id="progressPercentText" class="text-center text-[9px] font-black text-cyan-accent tracking-widest">0% COMPLETED</p>
+                    </div>
+                </div>
+
+                <div class="border-t border-white/5 my-4"></div>
+
+                <div class="space-y-5">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-[10px] font-black text-green-accent uppercase tracking-widest">Final Target</h3>
+                        <button onclick="setFinalTarget()" class="target-gear-btn text-gray-700 hover:text-white transition-colors"><i class="fa-solid fa-gear text-xs"></i></button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-[9px] text-gray-500 uppercase font-black">Total Net</p>
+                                <h2 id="finalProfitDisplay" class="text-3xl font-black text-white italic">₹0</h2>
+                            </div>
+                            <p id="finalTargetDisplay" class="text-[10px] font-bold text-gray-500 font-mono"></p>
+                        </div>
+                        <div class="progress-container"><div id="finalProgressBar" class="progress-fill !from-green-400 !to-cyan-400"></div></div>
+                        <p id="finalProgressPercentText" class="text-center text-[9px] font-black text-gray-400 uppercase tracking-widest">0% COMPLETED</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-8 bento-card overflow-hidden h-[400px] reveal-card">
+                <div class="p-6 border-b border-white/5 bg-white/[0.01] flex justify-between items-center">
+                    <p class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Recent Trades</p>
+                    <button onclick="exportData()" class="text-[9px] text-cyan-accent hover:text-white uppercase font-black transition-colors">Export CSV</button>
+                </div>
+                <div class="overflow-y-auto h-[310px] custom-scrollbar"><table class="w-full text-left"><tbody id="tableBody" class="divide-y divide-white/[0.03]"></tbody></table></div>
+            </div>
         </div>
     </div>
 
-    <div id="pwdModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl hidden items-center justify-center z-[110] p-4">
-        <div class="glass-morphism p-8 rounded-[2.5rem] w-full max-w-sm text-center border border-white/10 shadow-2xl">
-            <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fa-solid fa-user-shield text-3xl text-blue-500"></i>
+    <div id="withdrawModal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-6 backdrop-blur-md">
+        <div class="bento-card p-10 max-w-sm w-full border-red-500/20 shadow-2xl">
+            <h3 class="text-xs font-black uppercase tracking-widest text-red-500 mb-6">Withdraw Capital</h3>
+            <div class="space-y-4">
+                <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xs">₹</span><input type="number" id="withdrawInput" class="input-field pl-8" placeholder="Enter amount"></div>
+                <div class="flex gap-3 pt-4">
+                    <button onclick="handleWithdraw()" class="flex-1 py-4 bg-red-500 text-white rounded-2xl font-black text-[10px] uppercase italic hover:scale-105 transition-all">Withdraw</button>
+                    <button onclick="closeWithdrawModal()" class="flex-1 py-4 bg-white/5 text-white rounded-2xl font-black text-[10px] uppercase italic hover:bg-white/10 transition-all">Cancel</button>
+                </div>
             </div>
-            <h3 class="text-xl font-bold mb-2">Security Check</h3>
-            <p id="verifyMsg" class="text-gray-500 text-xs mb-8">Verify identity to change sensitive settings.</p>
-            
-            <div id="pwdInputSection">
-                <input type="password" id="verifyPwd" class="input-field text-center mb-6" placeholder="Password">
-            </div>
+        </div>
+    </div>
 
-            <div id="googleVerifySection" class="hidden w-full">
-                <button onclick="reauthGoogle()" class="w-full bg-white text-black py-4 rounded-2xl font-bold flex items-center justify-center gap-3 mb-6 shadow-xl active:bg-gray-200">
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" alt="Google"> 
-                    Verify with Google
-                </button>
+    <div id="inputPromptModal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-6 backdrop-blur-md">
+        <div class="bento-card p-10 max-w-sm w-full border-cyan-accent/20 shadow-2xl">
+            <h3 id="promptTitle" class="text-xs font-black uppercase tracking-widest text-cyan-accent mb-6">Update Value</h3>
+            <div class="space-y-4">
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xs">₹</span>
+                    <input type="number" id="promptInput" class="input-field pl-8" placeholder="0.00">
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button id="promptSubmitBtn" class="flex-1 py-4 bg-[#00d1ff] text-black rounded-2xl font-black text-[10px] uppercase italic hover:brightness-110 transition-all">Save</button>
+                    <button onclick="closePromptModal()" class="flex-1 py-4 bg-white/5 text-white rounded-2xl font-black text-[10px] uppercase italic hover:bg-white/10 transition-all">Cancel</button>
+                </div>
             </div>
+        </div>
+    </div>
 
+    <div id="settingsModal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-xl z-50 items-center justify-end">
+        <div id="settingsPanel" class="w-full max-w-md h-full bg-[#050505] border-l border-white/5 p-8 transition-transform duration-500 translate-x-full flex flex-col overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center mb-10"><h2 class="text-2xl font-black italic tracking-tighter uppercase">Settings</h2><button onclick="toggleSettings()" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button></div>
+            <div class="space-y-8">
+                <section>
+                    <p class="text-[9px] text-gray-600 font-black uppercase mb-4 tracking-widest">Profile & Account</p>
+                    <button onclick="verifyAndAction('updateCap')" class="w-full p-5 bg-white/5 border border-white/5 rounded-2xl text-left flex justify-between items-center group">
+                        <div><h3 class="text-sm font-bold">Initial Capital</h3><p class="text-[10px] text-gray-500 italic">Manage balance</p></div>
+                        <i class="fa-solid fa-indian-rupee-sign text-cyan-accent text-xs"></i>
+                    </button>
+                </section>
+                <section>
+                    <p class="text-[9px] text-gray-600 font-black uppercase mb-4 tracking-widest">View Mode</p>
+                    <div class="space-y-3">
+                        <div class="p-5 bg-white/5 border border-white/5 rounded-2xl flex justify-between items-center">
+                            <div><h3 class="text-sm font-bold">Privacy Mode</h3><p class="text-[10px] text-gray-500 italic">Blur values</p></div>
+                            <input type="checkbox" id="privacyToggle" class="w-4 h-4 accent-cyan-accent" onchange="togglePrivacy()">
+                        </div>
+                        <div class="p-5 bg-white/5 border border-white/5 rounded-2xl flex justify-between items-center">
+                            <div><h3 class="text-sm font-bold">Hide Symbol</h3><p class="text-[10px] text-gray-500 italic">Remove ₹</p></div>
+                            <input type="checkbox" id="symbolToggle" class="w-4 h-4 accent-cyan-accent" onchange="toggleSymbol()">
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <p class="text-[9px] text-gray-600 font-black uppercase mb-4 tracking-widest">Help</p>
+                    <button onclick="openSupportModal()" class="w-full p-5 bg-white/5 border border-white/5 rounded-2xl text-left flex justify-between items-center">
+                        <div><h3 class="text-sm font-bold">Contact Us</h3><p class="text-[10px] text-gray-500 italic">Feedback</p></div>
+                        <i class="fa-solid fa-headset text-cyan-accent text-xs"></i>
+                    </button>
+                </section>
+                <section>
+                    <p class="text-[9px] text-gray-600 font-black uppercase mb-4 tracking-widest text-red-900">Danger Zone</p>
+                    <div class="space-y-3">
+                        <button onclick="resetWeeklyManual()" class="w-full p-5 bg-white/5 border border-white/5 rounded-2xl text-left flex justify-between items-center">
+                            <div><h3 class="text-sm font-bold text-purple-400">Reset Weekly</h3><p class="text-[10px] text-gray-500 italic">Reset goal</p></div>
+                            <i class="fa-solid fa-rotate text-purple-accent text-xs"></i>
+                        </button>
+                        <button onclick="verifyAndAction('reset')" class="w-full p-5 bg-red-500/5 border border-red-500/10 rounded-2xl text-left flex justify-between items-center">
+                            <div><h3 class="text-sm font-bold text-red-500">Wipe Data</h3><p class="text-[10px] text-gray-700 italic">Delete all</p></div>
+                            <i class="fa-solid fa-trash-can text-red-500 text-xs"></i>
+                        </button>
+                    </div>
+                </section>
+                <button onclick="logout()" class="w-full py-4 text-center text-gray-700 hover:text-white text-[10px] font-black uppercase tracking-[0.4em]">Log Out</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pwdModal" class="hidden fixed inset-0 bg-black/95 z-[60] flex items-center justify-center p-6 backdrop-blur-md">
+        <div class="bento-card p-10 max-w-sm w-full border-cyan-accent/20">
+            <h3 class="text-sm font-black uppercase tracking-widest mb-6">Security Check</h3>
+            <input type="password" id="verifyPwd" placeholder="Password" class="input-field mb-6">
             <div class="flex gap-3">
-                <button onclick="closePwdModal()" class="flex-1 py-4 bg-white/5 rounded-2xl font-bold">Cancel</button>
-                <button id="confirmBtn" class="flex-1 btn-primary py-4 rounded-2xl">Confirm</button>
+                <button id="confirmBtn" class="flex-1 py-4 bg-[#00d1ff] text-black rounded-2xl font-black text-[10px] uppercase italic hover:brightness-110 transition-all">Verify</button>
+                <button onclick="closePwdModal()" class="flex-1 py-4 bg-white/5 text-white rounded-2xl font-black text-[10px] uppercase italic hover:bg-white/10 transition-all">Cancel</button>
             </div>
         </div>
     </div>
 
-    <script type="module" src="app.js"></script>
+    <div id="confirmModal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-6 backdrop-blur-md">
+        <div class="bento-card p-10 max-w-sm w-full border-white/10 shadow-2xl text-center">
+            <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-6 border border-white/10">
+                <i id="confirmIcon" class="fa-solid fa-circle-question text-cyan-accent text-xl"></i>
+            </div>
+            <h3 id="confirmTitle" class="text-sm font-black uppercase tracking-widest text-white mb-2">Confirm Action</h3>
+            <p id="confirmMsg" class="text-xs text-gray-400 italic mb-8"></p>
+            <div class="flex gap-3">
+                <button id="executeBtn" class="flex-1 py-4 bg-white text-black rounded-2xl font-black text-[10px] uppercase italic hover:bg-[#00d1ff] transition-all">Confirm</button>
+                <button onclick="closeConfirmModal()" class="flex-1 py-4 bg-white/5 text-white rounded-2xl font-black text-[10px] uppercase italic hover:bg-white/10 transition-all">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="supportModal" class="hidden fixed inset-0 bg-black/95 z-[70] flex items-center justify-center p-6 backdrop-blur-md">
+        <div class="bento-card p-10 max-w-md w-full border-cyan-accent/20">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-xs font-black uppercase tracking-widest text-cyan-accent">Send Feedback</h3>
+                <button onclick="closeSupportModal()" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-4">
+                <input type="text" id="supportSubject" placeholder="Subject" class="input-field">
+                <textarea id="supportMsg" placeholder="Message..." class="input-field h-32 resize-none"></textarea>
+                <div class="flex gap-3 pt-4">
+                    <button onclick="sendSupport()" class="flex-1 py-4 bg-[#00d1ff] text-black rounded-2xl font-black text-[10px] uppercase italic hover:brightness-110 transition-all">Submit</button>
+                    <button onclick="closeSupportModal()" class="flex-1 py-4 bg-white/5 text-white rounded-2xl font-black text-[10px] uppercase italic hover:bg-white/10 transition-all">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js" type="module"></script>
 </body>
 </html>

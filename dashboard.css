@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;0,800;1,800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+    --bg-main: #060606;
+    --card-bg: #0b0b0b; 
+    --cyan-accent: #00d1ff;
+    --purple-accent: #a155ff;
+    --green-accent: #00ff88;
+    --border-soft: rgba(255, 255, 255, 0.05);
+    --backlight: rgba(255, 255, 255, 0.04); 
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    background-image: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #050505 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .font-black {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.reveal-card { 
+    opacity: 0; 
+    transform: translateY(15px); 
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
+}
+
+.reveal-card.active { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.bento-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 32px;
+    position: relative;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.8), 
+        0 0 30px -5px var(--backlight),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.bento-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background-color: #0f0f0f;
+    transform: translateY(-2px);
+}
+
+.input-field { 
+    background: #000; 
+    border: 1px solid var(--border-soft); 
+    padding: 12px 16px; 
+    border-radius: 16px; 
+    color: white; 
+    outline: none; 
+    width: 100%; 
+    font-size: 11px;
+    font-weight: 600;
+    transition: 0.3s ease; 
+}
+
+.input-field:focus { 
+    border-color: rgba(255, 255, 255, 0.15); 
+    background: #050505;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.03);
+}
+
+.checkbox-container { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    cursor: pointer; 
+    font-size: 10px; 
+    font-weight: 800;
+    color: #444; 
+    text-transform: uppercase;
+    transition: 0.3s; 
+}
+
+.checkbox-container:hover { color: #fff; }
+
+.rule-item { 
+    appearance: none; 
+    width: 18px; 
+    height: 18px; 
+    border: 1.5px solid #222; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    position: relative; 
+    background: #000;
+    transition: 0.3s;
+}
+
+.rule-item:checked { 
+    background: var(--cyan-accent); 
+    border-color: var(--cyan-accent); 
+    box-shadow: 0 0 10px rgba(0, 209, 255, 0.3);
+}
+
+.rule-item:checked::after { 
+    content: '\f00c'; 
+    font-family: 'Font Awesome 6 Free'; 
+    font-weight: 900; 
+    font-size: 9px; 
+    color: #000; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+
+.text-cyan-accent { 
+    color: var(--cyan-accent); 
+    text-shadow: 0 0 10px rgba(0, 209, 255, 0.3); 
+}
+
+.btn-primary { 
+    background: linear-gradient(135deg, #00d1ff, #a155ff); 
+    color: #000; 
+    font-weight: 800; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 18px;
+    padding: 12px 24px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+.btn-primary:hover { 
+    transform: scale(1.02); 
+    filter: brightness(1.1); 
+    box-shadow: 0 10px 25px rgba(0, 209, 255, 0.3); 
+}
+
+.progress-container { 
+    width: 100%; 
+    height: 10px; 
+    background: rgba(0,0,0,0.8); 
+    border-radius: 20px; 
+    overflow: hidden; 
+    margin: 15px 0; 
+    border: 1px solid rgba(255,255,255,0.02); 
+}
+
+.progress-fill { 
+    height: 100%; 
+    background: linear-gradient(90deg, var(--cyan-accent), var(--purple-accent)); 
+    width: 0%; 
+    box-shadow: 0 0 15px rgba(0, 209, 255, 0.4); 
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); 
+}
+
+#tableBody tr {
+    transition: background 0.3s ease;
+}
+
+#tableBody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #252525; }
+
+.privacy-blur {
+    transition: filter 0.3s ease;
+}
+
+.privacy-blur.active {
+    filter: blur(8px);
+}
+
+#settingsPanel::-webkit-scrollbar {
+    width: 3px;
+}
+
+@media (max-width: 1024px) {
+    .bento-card {
+        border-radius: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .bento-card {
+        border-radius: 20px;
+        box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-primary {
+        padding: 14px 20px;
+        width: 100%;
+        font-size: 13px;
+    }
+
+    .input-field {
+        font-size: 14px;
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .checkbox-container {
+        font-size: 11px;
+        gap: 10px;
+    }
+
+    .rule-item {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bento-card {
+        border-radius: 16px;
+    }
+
+    h1 { font-size: 24px; }
+    h2 { font-size: 20px; }
+    h3 { font-size: 18px; }
+
+    .progress-container {
+        height: 8px;
+    }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.7;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.6;
+}
