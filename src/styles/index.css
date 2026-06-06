@@ -1,0 +1,1353 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════════════════════════════════
+   GLOBAL THEME TOKENS
+   — Light  : :root
+   — Dark   : [data-theme="dark"]
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── LIGHT THEME ───────────────────────────────────────────────────── */
+:root {
+  /* ─ Page (Whiteness kam karke ek premium soft tone diya hai) ─ */
+  --bg-page:              #f7eaf3;
+
+  /* ─ Navbar glass ─ */
+  --nav-bg:               rgba(255,255,255,0.24);
+  --nav-border:           rgba(255,255,255,0.60);
+  --nav-shadow:           0 8px 40px rgba(0,0,0,0.06),
+                          inset 0 1px 0 rgba(255,255,255,0.95);
+
+  /* ─ Bar glass (content panel) ─ */
+  --bar-bg:               rgba(255,255,255,0.26);
+  --bar-border:           rgba(255,255,255,0.65);
+  --bar-shadow:           inset 0 2px 4px rgba(255,255,255,0.80),
+                          0 8px 32px rgba(0,0,0,0.05);
+
+  /* ─ Card glass ─ */
+  --card-bg:              rgba(255,255,255,0.24);
+  --card-border:          rgba(255,255,255,0.65);
+  --card-shadow:          inset 0 2px 4px rgba(255,255,255,0.88),
+                          0 16px 48px rgba(0,0,0,0.06);
+
+  /* ─ Stat glass ─ */
+  --stat-bg:              rgba(255,255,255,0.24);
+  --stat-border:          rgba(255,255,255,0.70);
+  --stat-shadow:          inset 0 2px 4px rgba(255,255,255,0.90),
+                          0 12px 40px rgba(0,0,0,0.06);
+
+  /* ─ Icon circle ─ */
+  --icon-circle-bg:       rgba(255,255,255,0.55);
+  --icon-circle-border:   rgba(255,255,255,1.00);
+  --icon-circle-shadow:   inset 0 2px 6px rgba(255,255,255,0.85);
+
+  /* ─ Footer ─ */
+  --footer-bg:            rgba(255,255,255,0.32);
+  --footer-border:        rgba(255,255,255,0.65);
+  --footer-head-text:     #334155;
+
+  /* ─ Drawer ─ */
+  --drawer-bg:            rgba(255,255,255,0.80);
+  --drawer-border:        rgba(255,255,255,0.80);
+
+  /* ─ Text ─ */
+  --txt-primary:          #1e293b;
+  --txt-muted:            #64748b;
+  --txt-sub:              #64748b;
+  --txt-name:             #1e293b;
+  --txt-city:             #64748b;
+  --txt-head-from:        #0f172a;
+  --txt-head-via:         #581c87;
+  --txt-head-to:          #334155;
+
+  /* ─ Heading / section gradients ─ */
+  --heading-from:         #0f172a;
+  --heading-via:          #581c87;
+  --heading-to:           #334155;
+
+  /* ─ Highlight gradient (inline spans) ─ */
+  --hl-from:              #6d28d9;
+  --hl-via:               #9333ea;
+  --hl-to:                #db2777;
+
+  /* ─ Brand name gradient ─ */
+  --brand-from:           #0f172a;
+  --brand-to:             #6b21a8;
+
+  /* ─ Scroll progress bar ─ */
+  --progress-from:        #7c3aed;
+  --progress-via:         #a855f7;
+  --progress-to:          #ec4899;
+
+  /* ─ Nav links ─ */
+  --navlink-active-text:  #6d28d9;
+  --navlink-active-bg:    rgba(216,180,254,0.70);
+  --navlink-idle-text:    #475569;
+
+  /* ─ Buttons ─ */
+  --btn-solid-bg:         linear-gradient(135deg, #1e293b, #6d28d9);
+  --btn-solid-text:       #ffffff;
+  --btn-solid-hover-bg:   linear-gradient(135deg, #334155, #7c3aed);
+
+  --btn-green-bg:         rgba(255,255,255,0.60);
+  --btn-green-border:     rgba(255,255,255,1.00);
+  --btn-green-text:       #15803d;
+
+  /* ─ Scroll-to-top ─ */
+  --s2t-bg:               rgba(255,255,255,0.70);
+  --s2t-border:           rgba(255,255,255,1.00);
+  --s2t-text:             #334155;
+
+  /* ─ Toggle switch ─ */
+  --toggle-bg:            rgba(0,0,0,0.10);
+  --toggle-border:        rgba(0,0,0,0.12);
+  --toggle-thumb-shadow:   0 6px 18px rgba(15,23,42,0.18),
+                           inset 0 1px 0 rgba(255,255,255,0.92);
+
+  /* ─ Liquid glass depth ─ */
+  --liquid-blur:           42px;
+  --liquid-saturate:       180%;
+  --liquid-highlight:      rgba(255,255,255,0.46);
+  --liquid-edge:           rgba(255,255,255,0.84);
+  --liquid-sheen:          rgba(255,255,255,0.30);
+  --liquid-shadow:         0 22px 60px rgba(70,55,120,0.13);
+  --border:                rgba(0,0,0,0.12);
+  --txt-secondary:         #64748b;
+
+  /* ─ Status ─ */
+  --state-ok-bg:          #ffffff;
+  --state-ok-border:      #bbf7d0;
+  --state-ok-text:        #15803d;
+  --state-ok-icon:        #22c55e;
+
+  --state-err-bg:         #ffffff;
+  --state-err-border:     #fecaca;
+  --state-err-text:       #dc2626;
+  --state-err-icon:       #ef4444;
+
+  /* ─ Testimonial avatar ─ */
+  --avatar-bg:            rgba(233,213,255,0.80);
+  --avatar-border:        #e9d5ff;
+  --avatar-text:          #7e22ce;
+
+  /* ─ Badges ─ */
+  --live-bg:              rgba(240,253,244,0.90);
+  --live-border:          #bbf7d0;
+  --live-text:            #15803d;
+
+  --ver-bg:               rgba(240,253,244,0.90);
+  --ver-border:           #bbf7d0;
+  --ver-text:             #15803d;
+
+  --soon-bg:              rgba(241,245,249,0.80);
+  --soon-border:          #e2e8f0;
+  --soon-text:            #94a3b8;
+
+  --udev-bg:              rgba(250,245,255,0.80);
+  --udev-border:          #e9d5ff;
+  --udev-text:            #9333ea;
+
+  /* ─ Social icon buttons ─ */
+  --social-bg:            rgba(255,255,255,0.50);
+  --social-border:        rgba(255,255,255,1.00);
+  --social-text:          #94a3b8;
+
+  /* ─ Divider ─ */
+  --divider:              rgba(255,255,255,0.45);
+
+  /* ─ Misc accent ─ */
+  --bg-bar:               rgba(255,255,255,0.28);
+  --accent-indian:        #6d28d9;
+  --accent-indian-dim:    rgba(109,40,217,0.10);
+  --clr-profit:           #15803d;
+  --clr-loss:             #dc2626;
+  /* Additional semantic colors used in JS (avoid hardcoded hex in components) */
+  --color-cyan:           #06b6d4;
+  --color-purple:         #a855f7;
+  --color-pink:           #ec4899;
+  --color-green:          #22c55e;
+  --color-red:            #ef4444;
+  --color-amber:          #f59e0b;
+  --color-muted:          #64748b;
+  --color-light-cyan:     #38bdf8;
+  --color-light-purple:   #a78bfa;
+  /* Additional named tokens used by JS theme helpers */
+  --pearl-white:         #F8F9FA;
+  --charcoal-stone:      #36454F;
+  --peach-ice:          #FADADD;
+  --aqua-mist:          #E0FFFF;
+  --clr-profit-dim:       rgba(21,128,61,0.10);
+  --clr-loss-dim:         rgba(220,38,38,0.10);
+  --border-strong:        rgba(0,0,0,0.15);
+
+  /* ─ Mobile section heading ─ */
+  --m-heading-color:      transparent;
+
+  /* ─ Background orbs (Baby Pink & Yellow Mix Wapas Laya aur thoda bright kiya) ─ */
+  --orb1-color:           rgba(255, 190, 218, 0.46); /* Baby pink */
+  --orb2-color:           rgba(255, 238, 166, 0.32); /* Light yellow */
+  --orb3-color:           rgba(255, 224, 178, 0.18); /* Warm hint */
+  --orb4-color:           rgba(255, 211, 229, 0.36); /* Blush pink */
+}
+
+/* ── DARK THEME — Burnt Oak & Parchment ───────────────────────────── */
+/* Palette: #000000 · #1F150C · #412D15 · #E1DCC9                     */
+[data-theme="dark"] {
+  /* ─ Page ─ */
+  --bg-page:              #000000;
+
+  /* ─ Navbar glass ─ */
+  --nav-bg:               rgba(31,21,12,0.72);
+  --nav-border:           rgba(225,220,201,0.10);
+  --nav-shadow:           0 8px 40px rgba(0,0,0,0.70),
+                          inset 0 1px 0 rgba(225,220,201,0.07);
+
+  /* ─ Bar glass ─ */
+  --bar-bg:               rgba(31,21,12,0.45);
+  --bar-border:           rgba(225,220,201,0.09);
+  --bar-shadow:           inset 0 1px 1px rgba(225,220,201,0.06);
+
+  /* ─ Card glass ─ */
+  --card-bg:              rgba(31,21,12,0.55);
+  --card-border:          rgba(225,220,201,0.11);
+  --card-shadow:          inset 0 1px 2px rgba(225,220,201,0.07),
+                          0 16px 48px rgba(0,0,0,0.55);
+
+  /* ─ Stat glass ─ */
+  --stat-bg:              rgba(31,21,12,0.50);
+  --stat-border:          rgba(225,220,201,0.09);
+  --stat-shadow:          inset 0 1px 1px rgba(225,220,201,0.06),
+                          0 16px 40px rgba(0,0,0,0.55);
+
+  /* ─ Icon circle ─ */
+  --icon-circle-bg:       rgba(65,45,21,0.55);
+  --icon-circle-border:   rgba(225,220,201,0.18);
+  --icon-circle-shadow:   inset 0 1px 2px rgba(225,220,201,0.10);
+
+  /* ─ Footer ─ */
+  --footer-bg:            rgba(10,7,4,0.88);
+  --footer-border:        rgba(225,220,201,0.09);
+  --footer-head-text:     #d5d0bc;
+
+  /* ─ Drawer ─ */
+  --drawer-bg:            rgba(15,10,6,0.94);
+  --drawer-border:        rgba(225,220,201,0.12);
+
+  /* ─ Text ─ */
+  --txt-primary:          #E1DCC9;
+  --txt-muted:            #9e9885;
+  --txt-sub:              #9e9885;
+  --txt-name:             #cdc9b5;
+  --txt-city:             #9e9885;
+  --txt-head-from:        #E1DCC9;
+  --txt-head-via:         #cdc9b5;
+  --txt-head-to:          #b8b3a0;
+
+  /* ─ Heading / section gradients ─ */
+  --heading-from:         #E1DCC9;
+  --heading-via:          #cdc9b5;
+  --heading-to:           #b8b3a0;
+
+  /* ─ Highlight gradient ─ */
+  --hl-from:              #d4c49e;
+  --hl-via:               #c9b48a;
+  --hl-to:                #bf9e6f;
+
+  /* ─ Brand name gradient ─ */
+  --brand-from:           #E1DCC9;
+  --brand-to:             #c9b48a;
+
+  /* ─ Scroll progress bar ─ */
+  --progress-from:        #412D15;
+  --progress-via:         #7a5c30;
+  --progress-to:          #E1DCC9;
+
+  /* ─ Nav links ─ */
+  --navlink-active-text:  #E1DCC9;
+  --navlink-active-bg:    rgba(65,45,21,0.70);
+  --navlink-idle-text:    #9e9885;
+
+  /* ─ Buttons ─ */
+  --btn-solid-bg:         rgba(65,45,21,0.40);
+  --btn-solid-text:       #E1DCC9;
+  --btn-solid-border:     rgba(225,220,201,0.30);
+  --btn-solid-hover-bg:   rgba(65,45,21,0.65);
+
+  --btn-green-bg:         rgba(65,45,21,0.35);
+  --btn-green-border:     rgba(225,220,201,0.35);
+  --btn-green-text:       #c9b48a;
+
+  /* ─ Scroll-to-top ─ */
+  --s2t-bg:               rgba(31,21,12,0.72);
+  --s2t-border:           rgba(225,220,201,0.22);
+  --s2t-text:             #E1DCC9;
+
+  /* ─ Toggle switch ─ */
+  --toggle-bg:            rgba(255,255,255,0.07);
+  --toggle-border:        rgba(225,220,201,0.18);
+  --toggle-thumb-shadow:   0 6px 18px rgba(0,0,0,0.45),
+                           inset 0 1px 0 rgba(225,220,201,0.70);
+
+  /* ─ Liquid glass depth ─ */
+  --liquid-blur:           42px;
+  --liquid-saturate:       160%;
+  --liquid-highlight:      rgba(225,220,201,0.06);
+  --liquid-edge:           rgba(225,220,201,0.14);
+  --liquid-sheen:          rgba(225,220,201,0.09);
+  --liquid-shadow:         0 24px 70px rgba(0,0,0,0.58);
+  --border:                rgba(225,220,201,0.12);
+  --txt-secondary:         #9e9885;
+
+  /* ─ Status ─ */
+  --state-ok-bg:          rgba(65,45,21,0.30);
+  --state-ok-border:      rgba(225,220,201,0.25);
+  --state-ok-text:        #cdc9b5;
+  --state-ok-icon:        #c9b48a;
+
+  --state-err-bg:         rgba(120,40,40,0.20);
+  --state-err-border:     rgba(220,80,80,0.28);
+  --state-err-text:       #f9c4c4;
+  --state-err-icon:       #f47171;
+
+  /* ─ Testimonial avatar ─ */
+  --avatar-bg:            rgba(65,45,21,0.55);
+  --avatar-border:        rgba(225,220,201,0.18);
+  --avatar-text:          #E1DCC9;
+
+  /* ─ Badges ─ */
+  --live-bg:              rgba(65,45,21,0.45);
+  --live-border:          rgba(225,220,201,0.25);
+  --live-text:            #c9b48a;
+
+  --ver-bg:               rgba(65,45,21,0.38);
+  --ver-border:           rgba(225,220,201,0.20);
+  --ver-text:             #c9b48a;
+
+  --soon-bg:              rgba(31,21,12,0.35);
+  --soon-border:          rgba(225,220,201,0.10);
+  --soon-text:            #6b6455;
+
+  --udev-bg:              rgba(65,45,21,0.38);
+  --udev-border:          rgba(225,220,201,0.20);
+  --udev-text:            #bf9e6f;
+
+  /* ─ Social icon buttons ─ */
+  --social-bg:            rgba(31,21,12,0.45);
+  --social-border:        rgba(225,220,201,0.16);
+  --social-text:          #9e9885;
+
+  /* ─ Divider ─ */
+  --divider:              rgba(225,220,201,0.10);
+
+  /* ─ Misc accent ─ */
+  --bg-bar:               rgba(31,21,12,0.40);
+  --accent-indian:        #c9b48a;
+  --accent-indian-dim:    rgba(201,180,138,0.12);
+  --clr-profit:           #b8c98a;
+  --clr-loss:             #f47171;
+  --clr-profit-dim:       rgba(184,201,138,0.12);
+  --clr-loss-dim:         rgba(244,113,113,0.12);
+  --border-strong:        rgba(225,220,201,0.18);
+
+  /* ─ Mobile section heading ─ */
+  --m-heading-color:      #c9b48a;
+
+  /* ─ Background orbs ─ */
+  --orb1-color:           rgba(65,45,21,0.14);
+  --orb2-color:           rgba(31,21,12,0.22);
+  --orb3-color:           rgba(0,0,0,0.30);
+  --orb4-color:           transparent;
+
+  /* ─ Semantic JS color tokens ─ */
+  --color-cyan:           #c9b48a;
+  --color-purple:         #bf9e6f;
+  --color-pink:           #d4c49e;
+  --color-green:          #b8c98a;
+  --color-red:            #f47171;
+  --color-amber:          #d4b87a;
+  --color-muted:          #9e9885;
+  --color-light-cyan:     #d5c9a8;
+  --color-light-purple:   #cdc0a0;
+
+  /* ─ Named JS theme helpers ─ */
+  --pearl-white:          #E1DCC9;
+  --charcoal-stone:       #1F150C;
+  --peach-ice:            #2a1e14;
+  --aqua-mist:            #1a120a;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   BASE STYLES
+   ════════════════════════════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--txt-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  /* ✨ Enhanced for buttery smooth theme switching */
+  transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*:focus-visible {
+  outline: 2px solid rgba(6,182,212,0.50);
+  outline-offset: 2px;
+  /* ✨ Added smooth outline offset transition */
+  transition: outline-offset 0.2s cubic-bezier(0.16, 1, 0.3, 1), outline-color 0.2s ease;
+}
+*:focus-visible:hover {
+  outline-offset: 4px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   UTILITY CLASSES  (via @layer utilities)
+   ════════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+
+  /* ── Scrollbar hide ──────────────────────────────────────────────── */
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* ── Glass panels ────────────────────────────────────────────────── */
+  .rb-nav-glass {
+    position:         relative;
+    overflow:         visible;
+    isolation:        isolate;
+    background:       linear-gradient(145deg, var(--liquid-highlight), transparent 38%),
+                      var(--nav-bg);
+    border:           1px solid var(--nav-border);
+    box-shadow:       var(--nav-shadow), var(--liquid-shadow),
+                      inset 0 0 0 1px var(--liquid-edge),
+                      inset 0 -22px 44px rgba(255,255,255,0.06);
+    backdrop-filter:  blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    /* ✨ Added uniform smooth transition */
+    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .rb-bar-glass {
+    position:         relative;
+    overflow:         hidden;
+    isolation:        isolate;
+    background:       linear-gradient(145deg, var(--liquid-highlight), transparent 42%),
+                      var(--bar-bg);
+    border:           1px solid var(--bar-border);
+    box-shadow:       var(--bar-shadow), var(--liquid-shadow),
+                      inset 0 0 0 1px var(--liquid-edge),
+                      inset 0 -20px 42px rgba(255,255,255,0.05);
+    backdrop-filter:  blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  }
+
+  /* ✨ Float effect on hover for bar glass */
+  .rb-bar-glass:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bar-shadow), var(--liquid-shadow), 0 12px 30px rgba(0,0,0,0.08);
+  }
+
+  .rb-card-glass {
+    position:         relative;
+    overflow:         hidden;
+    isolation:        isolate;
+    background:       linear-gradient(150deg, var(--liquid-highlight), transparent 44%),
+                      var(--card-bg);
+    border:           1px solid var(--card-border);
+    box-shadow:       var(--card-shadow), var(--liquid-shadow),
+                      inset 0 0 0 1px var(--liquid-edge),
+                      inset 0 -26px 54px rgba(255,255,255,0.06);
+    backdrop-filter:  blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    /* ✨ Smooth transform setup */
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ✨ Added float and shadow glow on hover */
+  .rb-card-glass:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow), var(--liquid-shadow), 0 20px 40px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(255,255,255,0.9);
+  }
+
+  [data-theme="dark"] .rb-nav-glass,
+  [data-theme="dark"] .rb-bar-glass,
+  [data-theme="dark"] .rb-card-glass,
+  [data-theme="dark"] .rb-stat-glass,
+  [data-theme="dark"] .rb-card,
+  [data-theme="dark"] .rb-card-lg,
+  [data-theme="dark"] .rb-modal-box {
+    box-shadow: var(--card-shadow), var(--liquid-shadow),
+                inset 1px 0 0 rgba(225,220,201,0.12),
+                inset -1px 0 0 rgba(225,220,201,0.07),
+                inset 0 1px 0 rgba(225,220,201,0.10),
+                inset 0 -1px 0 rgba(225,220,201,0.05),
+                0 0 0 1px rgba(225,220,201,0.07);
+  }
+
+  /* ✨ Adjusted dark mode hover shadow for warm glow */
+  [data-theme="dark"] .rb-card-glass:hover,
+  [data-theme="dark"] .rb-stat-glass:hover {
+    box-shadow: var(--card-shadow), var(--liquid-shadow), 0 20px 50px rgba(0,0,0,0.65), inset 0 0 0 1px rgba(225,220,201,0.18);
+  }
+
+  .rb-stat-glass {
+    position:         relative;
+    overflow:         hidden;
+    isolation:        isolate;
+    background:       linear-gradient(150deg, var(--liquid-highlight), transparent 46%),
+                      var(--stat-bg);
+    border:           1px solid var(--stat-border);
+    box-shadow:       var(--stat-shadow), var(--liquid-shadow),
+                      inset 0 0 0 1px var(--liquid-edge),
+                      inset 0 -18px 38px rgba(255,255,255,0.05);
+    backdrop-filter:  blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ✨ Subtle lift for stats */
+  .rb-stat-glass:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+
+  .rb-nav-glass > *,
+  .rb-bar-glass > *,
+  .rb-card-glass > *,
+  .rb-stat-glass > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .rb-nav-glass::after,
+  .rb-bar-glass::after,
+  .rb-card-glass::after,
+  .rb-stat-glass::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(circle at 18% 8%, var(--liquid-sheen), transparent 34%),
+      linear-gradient(115deg, transparent 18%, var(--liquid-sheen) 48%, transparent 72%);
+    opacity: 0.72;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    /* ✨ Smooth opacity transition for sheen */
+    transition: opacity 0.5s ease;
+  }
+
+  .rb-card-glass:hover::after,
+  .rb-stat-glass:hover::after {
+    opacity: 0.95;
+  }
+
+  /* ── Glass card hover shimmer ────────────────────────────────────── */
+  .rb-animated-card {
+    position:   relative;
+    overflow:   hidden;
+    isolation:  isolate;
+    transition: box-shadow 0.45s cubic-bezier(0.16,1,0.3,1), 
+                border-color 0.45s cubic-bezier(0.16,1,0.3,1), 
+                background 0.45s cubic-bezier(0.16,1,0.3,1),
+                transform 0.45s cubic-bezier(0.16,1,0.3,1); /* ✨ Added transform */
+  }
+
+  .rb-animated-card > * { position: relative; z-index: 1; }
+
+  .rb-animated-card::before {
+    content:    "";
+    position:   absolute;
+    inset:      0;
+    z-index:    0;
+    border-radius: inherit;
+    background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.18) 44%, transparent 64%);
+    opacity:    0;
+    transform:  translateX(-120%);
+    transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease; /* ✨ Better bezier for shimmer */
+    pointer-events: none;
+  }
+
+  .rb-animated-card:hover {
+    border-color: rgba(225,220,201,0.22);
+    box-shadow:   var(--card-shadow), 0 22px 60px rgba(31,21,12,0.28);
+    transform: translateY(-4px); /* ✨ Lift effect added */
+  }
+
+  .rb-animated-card:hover::before {
+    opacity:   1;
+    transform: translateX(120%);
+  }
+
+  /* ── Icon circle ─────────────────────────────────────────────────── */
+  .rb-icon-circle {
+    background:  linear-gradient(145deg, var(--liquid-highlight), transparent 48%),
+                 var(--icon-circle-bg);
+    border:      1px solid var(--icon-circle-border);
+    box-shadow:  var(--icon-circle-shadow),
+                 inset 0 0 0 1px var(--liquid-edge),
+                 0 10px 24px rgba(0,0,0,0.08);
+    backdrop-filter: blur(28px) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(28px) saturate(var(--liquid-saturate));
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* ✨ Subtle bouncy hover */
+  }
+
+  .rb-icon-circle:hover {
+    transform: scale(1.08);
+  }
+
+  /* ── Footer ──────────────────────────────────────────────────────── */
+  .rb-footer {
+    background:  var(--footer-bg);
+    border-top:  1px solid var(--footer-border);
+    backdrop-filter: blur(48px);
+    -webkit-backdrop-filter: blur(48px);
+    transition: background 0.5s ease;
+  }
+
+  /* ── Drawer ──────────────────────────────────────────────────────── */
+  .rb-drawer {
+    background:   linear-gradient(150deg, var(--liquid-highlight), transparent 44%),
+                  var(--drawer-bg);
+    border-left:  1px solid var(--drawer-border);
+    box-shadow:   var(--liquid-shadow),
+                  inset 1px 0 0 var(--liquid-edge);
+    backdrop-filter: blur(64px) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(64px) saturate(var(--liquid-saturate));
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* ✨ Smooth slide-in */
+  }
+
+  /* ── Ambient background ──────────────────────────────────────────── */
+  .rb-ambient-bg {
+    position:   fixed;
+    inset:      0;
+    z-index:    -1;
+    background:
+      radial-gradient(circle at 16% 18%, var(--orb1-color) 0 16%, transparent 42%),
+      radial-gradient(circle at 82% 16%, var(--orb2-color) 0 13%, transparent 40%),
+      radial-gradient(circle at 72% 82%, var(--orb3-color) 0 10%, transparent 38%),
+      radial-gradient(circle at 30% 78%, var(--orb4-color) 0 14%, transparent 42%),
+      var(--bg-page);
+    overflow:   hidden;
+    /* ✨ Slower and smoother transition for mode changing */
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="dark"] .rb-ambient-bg {
+    background:
+      radial-gradient(circle at 16% 18%, var(--orb1-color) 0 16%, transparent 42%),
+      radial-gradient(circle at 82% 16%, var(--orb2-color) 0 13%, transparent 40%),
+      radial-gradient(circle at 72% 82%, var(--orb3-color) 0 10%, transparent 38%),
+      var(--bg-page);
+  }
+
+  /* ── Text helpers ────────────────────────────────────────────────── */
+  .rb-txt-sub        { color: var(--txt-sub); transition: color 0.3s ease; }
+  .rb-txt-name       { color: var(--txt-name); transition: color 0.3s ease; }
+  .rb-footer-head    { color: var(--footer-head-text); transition: color 0.3s ease; }
+
+  /* ── Display font ────────────────────────────────────────────────── */
+  .rb-display {
+    font-family:     "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+    letter-spacing:  0;
+    text-wrap:       balance;
+    text-rendering:  geometricPrecision;
+  }
+
+  /* ── Heading gradient ────────────────────────────────────────────── */
+  .rb-txt-head {
+    background: linear-gradient(135deg, var(--txt-head-from), var(--txt-head-via), var(--txt-head-to));
+    background-size: 180% 180%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rb-gradient-flow 14s ease-in-out infinite alternate; /* ✨ Added alternate for seamless loop */
+  }
+
+  /* ── Highlight gradient (spans) ──────────────────────────────────── */
+  .rb-highlight {
+    background: linear-gradient(to right, var(--hl-from), var(--hl-via), var(--hl-to));
+    background-size: 180% 180%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rb-gradient-flow 10s ease-in-out infinite alternate;
+  }
+
+  /* ── Brand name gradient ─────────────────────────────────────────── */
+  .rb-brand {
+    background: linear-gradient(to right, var(--brand-from), var(--brand-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: opacity 0.3s ease;
+  }
+  .rb-brand:hover { opacity: 0.8; }
+
+  /* ── Section heading — desktop ───────────────────────────────────── */
+  .rb-section-head-desktop {
+    background: linear-gradient(135deg, var(--heading-from), var(--heading-via), var(--heading-to));
+    background-size: 180% 180%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0;
+    animation: rb-gradient-flow 12s ease-in-out infinite alternate;
+  }
+
+  /* ── Section heading — mobile ────────────────────────────────────── */
+  /* Light: same gradient as desktop */
+  :root .rb-section-head-mobile {
+    background: linear-gradient(135deg, var(--heading-from), var(--heading-via), var(--heading-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* Dark: solid parchment-gold */
+  [data-theme="dark"] .rb-section-head-mobile {
+    background:              none;
+    -webkit-background-clip: unset;
+    background-clip:         unset;
+    color:                   var(--m-heading-color);
+  }
+
+  /* ── Section bar — mobile ────────────────────────────────────────── */
+  .rb-section-bar-mobile {
+    background: linear-gradient(to right, #a855f7, #ec4899);
+    transition: background 0.5s ease;
+  }
+  [data-theme="dark"] .rb-section-bar-mobile {
+    background: linear-gradient(to right, #412D15, #c9b48a);
+  }
+
+  /* ── Scroll progress bar ─────────────────────────────────────────── */
+  .rb-progress-bar {
+    background: linear-gradient(to right, var(--progress-from), var(--progress-via), var(--progress-to));
+    transition: width 0.1s linear; /* ✨ Smooth filling */
+  }
+
+  /* ── Badges ──────────────────────────────────────────────────────── */
+  .rb-badge-live, .rb-badge-ver, .rb-badge-soon, .rb-badge-udev {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  }
+  .rb-badge-live:hover, .rb-badge-ver:hover, .rb-badge-soon:hover, .rb-badge-udev:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .rb-badge-live {
+    background: var(--live-bg);
+    border:     1px solid var(--live-border);
+    color:      var(--live-text);
+  }
+  .rb-badge-ver {
+    background: var(--ver-bg);
+    border:     1px solid var(--ver-border);
+    color:      var(--ver-text);
+  }
+  .rb-badge-soon {
+    background: var(--soon-bg);
+    border:     1px solid var(--soon-border);
+    color:      var(--soon-text);
+  }
+  .rb-badge-udev {
+    background: var(--udev-bg);
+    border:     1px solid var(--udev-border);
+    color:      var(--udev-text);
+  }
+
+  /* ── Toggle switch ───────────────────────────────────────────────── */
+  .rb-toggle-track {
+    background:
+      linear-gradient(145deg, var(--liquid-highlight), transparent 52%),
+      var(--toggle-bg);
+    border:     1px solid var(--toggle-border);
+    box-shadow: inset 0 1px 0 var(--liquid-edge),
+                inset 0 -8px 18px rgba(255,255,255,0.05),
+                0 8px 22px rgba(0,0,0,0.08);
+    backdrop-filter: blur(26px) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(26px) saturate(var(--liquid-saturate));
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+
+  .rb-toggle-thumb {
+    box-shadow: var(--toggle-thumb-shadow);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    /* ✨ Smooth springy toggle slide */
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* ── Scroll-to-top ───────────────────────────────────────────────── */
+  .rb-s2t {
+    background:      linear-gradient(145deg, var(--liquid-highlight), transparent 44%),
+                     var(--s2t-bg);
+    border:          1px solid var(--s2t-border);
+    color:           var(--s2t-text);
+    box-shadow:      var(--liquid-shadow), inset 0 0 0 1px var(--liquid-edge);
+    backdrop-filter: blur(40px) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(40px) saturate(var(--liquid-saturate));
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rb-s2t:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  }
+  /* ✨ Tactile press */
+  .rb-s2t:active {
+    transform: translateY(0) scale(0.95);
+  }
+
+  /* ── Social buttons ──────────────────────────────────────────────── */
+  .rb-social {
+    background: linear-gradient(145deg, var(--liquid-highlight), transparent 50%),
+                var(--social-bg);
+    border:     1px solid var(--social-border);
+    color:      var(--social-text);
+    box-shadow: inset 0 0 0 1px var(--liquid-edge),
+                0 8px 20px rgba(0,0,0,0.06);
+    backdrop-filter: blur(28px) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(28px) saturate(var(--liquid-saturate));
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rb-social:hover {
+    transform: translateY(-3px);
+    color: var(--txt-primary);
+    box-shadow: inset 0 0 0 1px var(--liquid-edge), 0 12px 28px rgba(0,0,0,0.12);
+  }
+  .rb-social:active {
+    transform: scale(0.92);
+  }
+
+  /* ── Divider ─────────────────────────────────────────────────────── */
+  .rb-divider { border-color: var(--divider); transition: border-color 0.4s ease; }
+
+  /* ── Status ──────────────────────────────────────────────────────── */
+  .rb-Status-ok, .rb-Status-err {
+    /* ✨ Added pop-in animation via transform */
+    animation: state-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  .rb-Status-ok {
+    background: var(--state-ok-bg);
+    border:     1px solid var(--state-ok-border);
+    color:      var(--state-ok-text);
+  }
+  .rb-Status-err {
+    background: var(--state-err-bg);
+    border:     1px solid var(--state-err-border);
+    color:      var(--state-err-text);
+  }
+  .rb-Status-ok-icon  { color: var(--state-ok-icon); }
+  .rb-Status-err-icon { color: var(--state-err-icon); }
+
+  /* ── Testimonial avatar ──────────────────────────────────────────── */
+  .rb-avatar {
+    background: var(--avatar-bg);
+    border:     1px solid var(--avatar-border);
+    color:      var(--avatar-text);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rb-avatar:hover {
+    transform: scale(1.1) rotate(3deg);
+  }
+
+  /* ── Nav link states ─────────────────────────────────────────────── */
+  .rb-navlink-active, .rb-navlink-idle {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rb-navlink-active {
+    color:      var(--navlink-active-text);
+    background: var(--navlink-active-bg);
+  }
+  .rb-navlink-idle {
+    color: var(--navlink-idle-text);
+  }
+  .rb-navlink-idle:hover {
+    color: var(--navlink-active-text);
+    background: rgba(100, 100, 100, 0.05);
+  }
+
+  /* ── Primary / CTA button ────────────────────────────────────────── */
+  .rb-btn-primary, .rb-btn-green {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+  
+  /* Light */
+  :root .rb-btn-primary {
+    background: linear-gradient(135deg, #1e293b, #6d28d9);
+    color:      #ffffff;
+    border:     none;
+  }
+  :root .rb-btn-primary:hover {
+    background: linear-gradient(135deg, #334155, #7c3aed);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3);
+  }
+  
+  /* Dark */
+  [data-theme="dark"] .rb-btn-primary {
+    background: var(--btn-solid-bg);
+    color:      var(--btn-solid-text);
+    border:     1px solid var(--btn-solid-border);
+  }
+  [data-theme="dark"] .rb-btn-primary:hover {
+    background: var(--btn-solid-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(65,45,21,0.40);
+  }
+
+  /* ✨ Tactile Click Effect on all buttons */
+  .rb-btn-primary:active, .rb-btn-green:active {
+    transform: translateY(1px) scale(0.97);
+    box-shadow: none;
+  }
+
+  /* ── Ghost warm button ───────────────────────────────────────────── */
+  .rb-btn-green {
+    background: var(--btn-green-bg);
+    border:     1px solid var(--btn-green-border);
+    color:      var(--btn-green-text);
+  }
+  .rb-btn-green:hover {
+    background: rgba(65,45,21,0.20);
+    transform: translateY(-2px);
+  }
+
+  .rb-card,
+  .rb-card-lg,
+  .rb-modal-box,
+  .rb-Status {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: linear-gradient(150deg, var(--liquid-highlight), transparent 44%),
+                var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow), var(--liquid-shadow),
+                inset 0 0 0 1px var(--liquid-edge),
+                inset 0 -24px 50px rgba(255,255,255,0.05);
+    backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    border-radius: 24px;
+    padding: 20px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .rb-card-lg {
+    border-radius: 32px;
+    padding: 28px;
+  }
+
+  .rb-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.50);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    /* ✨ Smooth fade */
+    animation: modal-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .rb-modal-box {
+    /* ✨ Bouncy scale in for modals */
+    animation: modal-scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .rb-progress-track {
+    width: 100%;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--bg-bar);
+    border: 1px solid var(--border);
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.12);
+  }
+
+  .rb-progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    box-shadow: 0 0 18px currentColor;
+    /* ✨ Adjusted width transition to be buttery */
+    transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* ── Typography scale ────────────────────────────────────────────── */
+  .rb-label {
+    font-size:      11px;
+    font-weight:    700;
+    color:          var(--txt-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+  }
+
+  .rb-value-xl {
+    font-size:      32px;
+    font-weight:    800;
+    font-family:    "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+    line-height:    1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .rb-value-md {
+    font-size:   18px;
+    font-weight: 700;
+    font-family: "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+  }
+
+  .rb-section-title {
+    font-size:      16px;
+    font-weight:    800;
+    color:          var(--txt-name);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family:    "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+  }
+
+  .rb-mono {
+    font-family: "Courier New", Courier, monospace;
+  }
+
+  /* ── 3-D preserve ────────────────────────────────────────────────── */
+  .transform-style-3d {
+    transform-style:   preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  /* ── Mobile safe area ────────────────────────────────────────────── */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   COMPONENT TRANSITIONS (outside @layer so they apply globally)
+   ════════════════════════════════════════════════════════════════════ */
+
+.rb-card-glass,
+.rb-stat-glass,
+.rb-bar-glass {
+  /* ✨ Using uniform high-end cubic-bezier for a snappier, yet fluid feel */
+  transition: box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bg-\[var\(--card-bg\)\],
+.bg-\[var\(--bar-bg\)\],
+.bg-\[var\(--drawer-bg\)\],
+.bg-\[var\(--nav-bg\)\] {
+  background-image: linear-gradient(150deg, var(--liquid-highlight), transparent 45%);
+  box-shadow: inset 0 0 0 1px var(--liquid-edge),
+              inset 0 -18px 42px rgba(255,255,255,0.045);
+  backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+  -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+tbody tr {
+  /* ✨ Enhanced table row hover transition */
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease;
+}
+tbody tr:hover {
+  transform: scale(1.002);
+}
+
+.dashboard-masonry {
+  column-count: 1;
+  column-gap: 0.75rem;
+}
+
+.dashboard-masonry-item {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 0.75rem;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  /* ✨ Gentle enter animation for masonry items */
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* Staggering delay based on basic sibling count assuming inline HTML usage */
+.dashboard-masonry-item:nth-child(2) { animation-delay: 0.1s; }
+.dashboard-masonry-item:nth-child(3) { animation-delay: 0.2s; }
+.dashboard-masonry-item:nth-child(4) { animation-delay: 0.3s; }
+
+.dashboard-masonry-item > .rb-card-glass,
+.dashboard-masonry-item > .rb-stat-glass {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-masonry {
+    column-count: 2;
+  }
+}
+
+.mobile-dashboard-nav {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 9990;
+  box-shadow: var(--nav-shadow), var(--liquid-shadow),
+              inset 0 1px 0 var(--liquid-edge),
+              0 12px 36px rgba(0,0,0,0.18);
+  transform: translateZ(0);
+  will-change: transform;
+  /* ✨ App-like pop in */
+  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mobile-dashboard-nav-item {
+  position: relative;
+  width: clamp(50px, 18vw, 64px);
+  height: 54px;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-dashboard-nav-item::before {
+  content: "";
+  position: absolute;
+  inset: 5px 4px;
+  z-index: -1;
+  border-radius: 18px;
+  background: var(--nav-bg);
+  opacity: 0;
+  transform: scale(0.82);
+  /* ✨ Bouncier active state transition */
+  transition: opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              background 0.3s ease;
+  box-shadow: inset 0 1px 0 var(--liquid-edge);
+}
+
+.mobile-dashboard-nav-item:hover::before,
+.mobile-dashboard-nav-item:active::before,
+.mobile-dashboard-nav-item.is-active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mobile-dashboard-nav-item.is-active {
+  transform: translateY(-2px);
+}
+
+.mobile-dashboard-nav-item i,
+.mobile-dashboard-nav-item span {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.mobile-dashboard-nav-item.is-active i {
+  transform: translateY(-2px) scale(1.15); /* ✨ Exaggerated scale for visual feedback */
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+   ════════════════════════════════════════════════════════════════════ */
+
+@keyframes rb-gradient-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+@keyframes orb {
+  0%   { transform: scale(1)   translate(0px, 0px);   opacity: 0.80; }
+  33%  { transform: scale(1.15) translate(35px,-55px);  opacity: 1.00; }
+  66%  { transform: scale(0.85) translate(-25px,45px);  opacity: 0.70; }
+  100% { transform: scale(1)   translate(0px, 0px);   opacity: 0.80; }
+}
+.animate-orb { animation: orb 24s ease-in-out infinite; }
+
+@keyframes rb-grid-drift {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(56px, 56px, 0); }
+}
+
+@keyframes rb-bg-sweep {
+  0%, 28%   { transform: translateX(-70%); }
+  62%, 100% { transform: translateX(70%); }
+}
+
+/* ✨ NEW ANIMATIONS */
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modal-fade-in {
+  0% { opacity: 0; backdrop-filter: blur(0px); }
+  100% { opacity: 1; backdrop-filter: blur(16px); }
+}
+
+@keyframes modal-scale-in {
+  0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes state-pop {
+  0% { opacity: 0; transform: translateY(100%) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   AMBIENT BACKGROUND — pseudo-elements
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Grid overlay */
+.rb-ambient-bg::before {
+  content: "";
+  position: absolute;
+  inset: -80px;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(255, 202, 225, 0.34) 0 13%, transparent 38%),
+    radial-gradient(circle at 74% 14%, rgba(255, 242, 186, 0.24) 0 10%, transparent 36%),
+    radial-gradient(circle at 88% 72%, rgba(255, 224, 188, 0.10) 0 9%, transparent 34%),
+    linear-gradient(rgba(147,51,234,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 56px 56px, 56px 56px;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
+  background-blend-mode: normal, normal, normal, normal, normal;
+  filter: blur(24px);
+  mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
+  opacity: 0.46;
+  animation: rb-grid-drift 26s linear infinite;
+  transition: opacity 0.8s ease, filter 0.8s ease;
+}
+
+/* Sweep shimmer */
+.rb-ambient-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.12) 44%, transparent 62%);
+  opacity: 0.18;
+  transform: translateX(-70%);
+  animation: rb-bg-sweep 16s ease-in-out infinite;
+  transition: opacity 0.8s ease;
+}
+
+/* Dark overrides for ambient layers */
+[data-theme="dark"] .rb-ambient-bg::before {
+  background-image:
+    linear-gradient(rgba(225,220,201,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(65,45,21,0.10) 1px, transparent 1px);
+  background-size: 56px 56px, 56px 56px;
+  background-repeat: repeat, repeat;
+  filter: none;
+  opacity: 0.22;
+}
+[data-theme="dark"] .rb-ambient-bg::after {
+  background: linear-gradient(115deg, transparent 20%, rgba(225,220,201,0.05) 44%, transparent 62%);
+  opacity: 0.12;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FORM / INPUT FIXES
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Date picker icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(0.2) saturate(0.8);
+}
+
+/* Hide number spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
+
+/* Select option colours */
+:root select option {
+  background: #f1f5f9;
+  color:      #1e293b;
+}
+[data-theme="dark"] select option {
+  background: #1F150C;
+  color:      #E1DCC9;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   MISC
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Recharts responsive fix */
+.recharts-wrapper { max-width: 100% !important; }
+
+/* Mobile horizontal scroll momentum */
+@media (max-width: 767px) {
+  .overflow-x-auto { -webkit-overflow-scrolling: touch; }
+}
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+::selection {
+  background: rgba(201,180,138,0.28);
+  color: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(65,45,21,0.45);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(65,45,21,0.70);
+}
+
+.glass-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
